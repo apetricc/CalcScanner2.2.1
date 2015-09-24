@@ -1,5 +1,7 @@
 /**
- * csci 431 project 1:
+ * csci 431 project 1: CalcScanner.
+ * The CalcScanner class uses the java PushbackReader class to scan through a text file and return the
+ * codes for each lexeme (as specified by the Tokens Interface).
  *
  * Created by petriccione on 9/12/15.
  */
@@ -10,8 +12,6 @@ public class CalcScanner implements Tokens {
     String fileName;
     FileReader reader;
     PushbackReader pbReader;
-    int token;//need to make token the return code, & just return token in the end
-    boolean checkEOF = false;
 
     public CalcScanner(String fileName) throws IOException {
         this.fileName = fileName;
@@ -32,10 +32,6 @@ public class CalcScanner implements Tokens {
         int c = 0;
         StringBuilder lexeme = new StringBuilder("");
         int c2;
-        int c3;
-        int c4;
-        int c5;
-
         while (true) {
             c = pbReader.read();
             if (c == -1) {
@@ -52,19 +48,39 @@ public class CalcScanner implements Tokens {
                     || c == '+'
                     || c == '-'
                     || c == '*'
-                    || c == '/') {
+                    ) {
 
                 return c;
             }
 
             if ((char) c == ':') {
-                while (true) {
                     c2 = pbReader.read();
                     if (c2 != '=') {
                         return -1;
                     }
                     return ASSIGN;
+            }
+
+            /**
+             * if cur_char = '/'
+             */
+            if (c == '/') {
+                String comment = "";
+                lexeme.append((char) c);
+                c = pbReader.read();
+                if (c == ' ') return '/';
+                if (c == '*') {
+                    c = pbReader.read();
+                    while ((char) c != '*') {
+                        lexeme.append((char) c);
+                        comment += lexeme;
+                        c = pbReader.read();
+                    }
+                    pbReader.unread(c);
+                    return COMMENT;
+
                 }
+
             }
             /* 
             here's the pseudoCode as Sheaffer explained it:

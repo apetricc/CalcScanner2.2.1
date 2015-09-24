@@ -12,5 +12,6 @@ public interface Tokens {
     final int IDENTIFIER = 999;
     final int DOUBLE_DOLLAR = 502;
     final int EOF = 600;
+    final int COMMENT = 222;
 
 }
