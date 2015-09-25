@@ -1,0 +1,14 @@
+tried to write but only read
+
+123  123catDog
+
+word := keyword
+
+/* 
+
+now I'm adding a comment, it shouldn't show the code for stuff in here
+ 123123 can you see this error?!
+*/
+
+12344555
+endOfLine$$
