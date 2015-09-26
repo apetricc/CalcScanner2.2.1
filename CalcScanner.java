@@ -1,3 +1,5 @@
+
+
 /**
  * csci 431 project 1: CalcScanner.
  * The CalcScanner class uses the java PushbackReader class to scan through a text file and return the
@@ -77,15 +79,7 @@ public class CalcScanner implements Tokens {
             if (c == '/') {
                 String comment = "";
                 lexeme.append((char) c);
-/**
-            public void readComment() {
-                c = pbReader.read();
-                while ((char) c != '*') {
-                    lexeme.append((char) c);
-                    comment += lexeme;
-                    c = pbReader.read();
-                }
-**/
+
                 c = pbReader.read();
                 if (c == ' ') return '/';
                 if (c == '*') {
@@ -151,6 +145,18 @@ public class CalcScanner implements Tokens {
         if (lexeme.toString().equals("write")) return WRITE;
         return ID;
     }
+
+/*
+            public void readComment() {
+                c = pbReader.read();
+                String comment = "";
+                while ((char) c != '*') {
+                    lexeme.append((char) c);
+                    comment += lexeme;
+                    c = pbReader.read();
+                }
+            }    
+            */
 
     public static void main(String[] args) throws IOException {
         CalcScanner myCalcScanner = new CalcScanner(args[0]);
